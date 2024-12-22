@@ -1,13 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
+    <!-- Google Analytics - Rastreia os dados do seu site -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCDJM3SNMJ"></script>
+    
+  <!-- Adicionando o link do Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous"
+  />
+
+    <!-- Definição do conjunto de caracteres do site -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Responsividade para dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    
+    <!-- Define o idioma do site como português brasileiro -->
+    <meta http-equiv="Content-Language" content="pt-BR">
+
+    <!-- Link para o ícone da fonte Font Awesome (ícones para redes sociais ou outros elementos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+    <!-- Importação de fontes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Permite que os motores de busca indexem o site -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Cor da barra de navegação do navegador (para dispositivos móveis) -->
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Descrição do site para motores de busca e compartilhamento nas redes sociais -->
+    <meta name="description" content="Lucas Mattos – Desenvolvedor de sistemas especializado em soluções web. Criação de sites para empresas e profissionais. Transforme suas ideias em realidade digital hoje mesmo!" />
+
+    <!-- Título da página, que aparecerá na aba do navegador -->
+    <title>Lucas Mattos | Desenvolvedor de sistemas</title>
+
+    <!-- Link para o arquivo de estilo (CSS) do site -->
+    <link rel="stylesheet" href="/src/index.css" />
+
+    <!-- Dados estruturados em formato JSON-LD (para melhorar o SEO e facilitar a busca e entendimento por motores de busca) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService", // Tipo de serviço, no caso psicóloga
+      "name": "Lucas Mattos - Desenvolvedor de sistemas",
+      "description": "Desenvolvedor de sistemas com foco em desenvolvimento web",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brasil"
+      },
+      "telephone": "+55-53-991244320", // Número de contato
+    }
+    </script>
+    
   </head>
   <body>
+    <!-- Div com id "root" para renderizar o conteúdo dinâmico do React -->
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Script para carregar o arquivo principal do React (main.jsx) -->
+    <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>

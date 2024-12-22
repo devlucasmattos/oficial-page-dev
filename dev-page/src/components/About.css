@@ -1,0 +1,81 @@
+/* About.css */
+
+/* Animação para elementos visíveis */
+.animated {
+    opacity: 0;
+    transform: translateY(50px); /* Começa deslocado para baixo */
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.animated.visible {
+    opacity: 1;
+    transform: translateY(0); /* Vai para a posição normal */
+}
+
+
+/* Estilo geral para a seção sobre */
+.sobre {
+    background-color: #fff; /* Cor de fundo neutra */
+    padding: 60px 0;
+}
+
+.sobre .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: -120px;
+}
+
+
+
+/* Estilo para a imagem de perfil */
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Menos espaço abaixo da imagem */
+}
+
+
+
+/* Aplicando a animação à imagem da profissional */
+.profile-image {
+    width: 160px; /* Largura da imagem */
+    height: 160px; /* Altura da imagem */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    border-radius: 50%; /* Torna a imagem arredondada */
+}
+
+.sobre h2 {
+    font-size: 2.1rem; /* Tamanho reduzido para manter simplicidade */
+    color: #004d7a; /* Cor escura para o título */
+    margin-bottom: 15px; /* Menos espaço abaixo do título */
+    font-family: 'Arial', sans-serif; /* Fonte mais simples */
+}
+
+
+.sobre p {
+    font-size: 1.1rem; /* Fonte do parágrafo menor */
+    color: #555; /* Cor mais suave */
+    line-height: 1.5;
+    max-width: 800px; /* Menos largura para o texto */
+    margin: 15px auto; /* Menos espaço em torno do parágrafo */
+    font-family: 'Arial', sans-serif; /* Fonte mais simples */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sobre h2 {
+        font-size: 1.6rem; /* Tamanho do título ainda mais discreto */
+    }
+
+    .sobre p {
+        font-size: 0.9rem; /* Fonte ainda mais discreta */
+    }
+
+    .profile-image {
+        width: 120px; /* Imagem ainda menor em telas pequenas */
+        height: 120px;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,101 @@
+/* Importando a fonte futurista e tecnológica */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
+
+/* Estilos gerais do header */
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(260deg, rgba(0,2,78,1) 0%, rgba(87,46,0,1) 100%);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 350px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Nome do profissional */
+.professional-name {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Profissão/descrição */
+.professional-crp {
+    font-size: 1.5rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Frase de chamada (CTA) */
+.cta-phrase {
+    font-size: 1.1rem;
+    color: #fff;
+    font-style: normal;
+    margin-bottom: 1.5rem;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Botão do WhatsApp */
+.whatsapp-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #004d7a;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ffffff;
+    z-index: 0;
+    position: relative;
+    transition: color 0.5s ease, transform 0.2s;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Efeito de hover para o botão */
+.whatsapp-button:hover {
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.whatsapp-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(260deg, rgba(0,1,47,1) 0%, rgba(66,35,0,1) 100%);
+    border-radius: inherit;
+    z-index: -1;
+    transition: left 0.7s ease;
+}
+
+.whatsapp-button:hover::before {
+    left: 0;
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+    .whatsapp-button {
+        font-size: 0.9rem;
+    }
+
+    .professional-name {
+        font-size: 2.5rem;
+    }
+
+    .header {
+        height: 340px;
+    }
+}
