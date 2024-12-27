@@ -3,20 +3,20 @@
   color: #fff;
   text-align: center;
   padding: 1.5rem 1rem;
-  font-size: 1rem; /* Fonte padrão */
+  font-size: 1rem; 
 }
 
-/* Ajustes para telas menores */
+
 @media (max-width: 768px) {
   .footer {
-    padding: 1rem 0.5rem; /* Reduz a altura em telas menores */
-    font-size: 0.85rem; /* Diminui o tamanho da fonte */
+    padding: 1rem 0.5rem; 
+    font-size: 0.85rem; 
   }
 }
 
 @media (max-width: 480px) {
   .footer {
-    padding: 0.8rem 0.4rem; /* Reduz ainda mais a altura */
-    font-size: 0.75rem; /* Fonte ainda menor para telas muito pequenas */
+    padding: 0.8rem 0.4rem; 
+    font-size: 0.75rem; 
   }
 }

@@ -1,66 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap'); 
+
 .services-container {
-  width: 95%;
+  background-color: #1a1a1a;
   padding: 20px;
-  background-color: #f5f5f5;
-  height: 410px;
+  width: 100%;
+  max-width: 1820px;
+  overflow: hidden;
 }
 
 .services-title {
   font-size: 2rem;
   margin-bottom: 20px;
-  text-align: center;
-  color: #333;
+  color: #FAFAFA;
+  font-family: 'Rajdhani', sans-serif; 
 }
 
 .services-carousel-container {
-  position: relative;
+  position: sticky;
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 450px;
+  padding: 47px;
 }
 
 .services-carousel {
   display: flex;
-  overflow-x: auto; /* Permite o deslize horizontal */
-  gap: 20px;
-  scroll-snap-type: x mandatory; /* Força o deslizamento para um item por vez */
-  padding-bottom: 20px; /* Espaçamento extra para facilitar o scroll */
-  max-width: 750px;
+  gap: 10px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  overflow-x: auto;
+  height: 410px;
+  padding-left: -5px;
+}
+
+.services-carousel::-webkit-scrollbar,
+.services-carousel-container::-webkit-scrollbar {
+  display: none;
 }
 
 .service-item {
-  margin-top: 20px;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  flex: 0 0 auto; /* Impede que os itens se estiquem e permite que fiquem do tamanho correto */
+  position: relative;
+  max-width: 300px;
+  width: 300px;
+  min-width: 200px;
+  height: 100%;
   transition: transform 0.3s ease;
-  scroll-snap-align: start; /* Garante que cada item se alinhe corretamente no deslize */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: center; 
 }
 
 .service-item:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
+  cursor: pointer;
+}
+
+.service-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;  
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;  
+}
+
+.service-item:hover .service-video {
+  opacity: 1;
 }
 
 .service-image {
   width: 100%;
-  height: 150px;
+  height: 100%;
   object-fit: cover;
+  position: relative;
+  z-index: 1;
 }
 
 .service-info {
-  padding: 15px;
+  padding: 10px;
+  height: 300px;
+  background-color: white;
+  position: relative;
+  z-index: 2;
+  font-family: 'Rajdhani', sans-serif; 
 }
 
 .service-title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin-bottom: 10px;
   color: #333;
+  font-family: 'Rajdhani', sans-serif; 
 }
 
 .service-description {
-  font-size: 1rem;
-  color: #666;
+  font-size: 0.9rem; 
+  color: #cacaca; 
+  line-height: 1.2; 
+  font-family: 'Rajdhani', sans-serif; 
+  text-align: justify; 
+  margin: 0.5rem 0; 
+  padding: 0.5rem; 
+  background-color: #201e2b;
+  border-radius: 10px; 
 }
 
 .carousel-btn {
@@ -74,7 +123,7 @@
   cursor: pointer;
   font-size: 2rem;
   z-index: 10;
-  transition: background-color 0.3s ease;
+  font-family: 'Rajdhani', sans-serif; 
 }
 
 .carousel-btn:hover {
@@ -82,9 +131,64 @@
 }
 
 .left {
-  left: 10px;
+  left: -5px;
 }
 
 .right {
-  right: 10px;
+  right: -5px;
+}
+
+@media (max-width: 1024px) {
+  .service-item {
+    max-width: 250px;  
+    flex-shrink: 1;   
+  }
+
+  .carousel-btn {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 728px) {
+  .service-item {
+    max-width: 200px;  
+    flex-shrink: 1;   
+  }
+
+  .service-description {
+    font-size: 0.7rem;
+  }
+  
+  .services-carousel-container {
+    padding: 15px;
+  }
+
+  .carousel-btn {
+    font-size: 1.6rem;
+    padding: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-item {
+    max-width: 150px;  
+    flex-shrink: 1;   
+  }
+
+  .service-description {
+    font-size: 0.68rem;
+  }
+
+  .services-carousel-container {
+    padding: 5px;
+  }
+
+  .services-carousel {
+      max-height: 300px;
+  }
+  .carousel-btn {
+    font-size: 1.4rem;
+    padding: 8px;
+  }
 }

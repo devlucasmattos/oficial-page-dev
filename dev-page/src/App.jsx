@@ -13,7 +13,6 @@ function App() {
       <Services />
       <Contact/>
       <Footer/>
-      {/* Adicione as outras seções posteriormente */}
     </>
   );
 }

@@ -1,81 +1,139 @@
-/* About.css */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
 
-/* Animação para elementos visíveis */
 .animated {
     opacity: 0;
-    transform: translateY(50px); /* Começa deslocado para baixo */
+    transform: translateY(50px);
     transition: opacity 0.5s, transform 0.5s;
 }
 
 .animated.visible {
     opacity: 1;
-    transform: translateY(0); /* Vai para a posição normal */
+    transform: translateY(0);
 }
 
-
-/* Estilo geral para a seção sobre */
 .sobre {
-    background-color: #fff; /* Cor de fundo neutra */
-    padding: 60px 0;
+    background-color: #1F1F1F;
+    padding: 10px 0;
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .sobre .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1250px;
     margin: 0 auto;
     text-align: center;
-    margin-top: -120px;
 }
 
-
-
-/* Estilo para a imagem de perfil */
-.image-container {
+.about-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 20px; /* Menos espaço abaixo da imagem */
+    gap: 40px;
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
 }
 
-
-
-/* Aplicando a animação à imagem da profissional */
 .profile-image {
-    width: 160px; /* Largura da imagem */
-    height: 160px; /* Altura da imagem */
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
-    border-radius: 50%; /* Torna a imagem arredondada */
+    flex: 0 0 auto;
+    max-width: 400px;
+    height: auto;
+    border-radius: 50%;
+    margin: 0 auto;
 }
 
-.sobre h2 {
-    font-size: 2.1rem; /* Tamanho reduzido para manter simplicidade */
-    color: #004d7a; /* Cor escura para o título */
-    margin-bottom: 15px; /* Menos espaço abaixo do título */
-    font-family: 'Arial', sans-serif; /* Fonte mais simples */
+.text-content {
+    flex: 1;
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
 }
 
+.text-content h2 {
+    font-size: 2.5rem;
+    color: #e6e6e6;
+    margin-bottom: 15px;
+    font-family: 'Rajdhani', sans-serif;
+}
 
-.sobre p {
-    font-size: 1.1rem; /* Fonte do parágrafo menor */
-    color: #555; /* Cor mais suave */
+.text-content p {
+    font-size: 1.2rem;
+    color: #e6e6e6;
     line-height: 1.5;
-    max-width: 800px; /* Menos largura para o texto */
-    margin: 15px auto; /* Menos espaço em torno do parágrafo */
-    font-family: 'Arial', sans-serif; /* Fonte mais simples */
+    max-width: 800px;
+    margin: 15px auto;
+    font-family: 'Rajdhani', sans-serif;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .sobre h2 {
-        font-size: 1.6rem; /* Tamanho do título ainda mais discreto */
+@media (max-width: 1024px) {
+    .sobre {
+        padding: 5px 0;
     }
 
-    .sobre p {
-        font-size: 0.9rem; /* Fonte ainda mais discreta */
+    .about-container {
+        padding: 20px 10px;
+    }
+
+    .text-content h2 {
+        font-size: 2rem;
+    }
+
+    .text-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sobre {
+        padding: 0;
+    }
+
+    .about-container {
+        padding: 10px 10px;
     }
 
     .profile-image {
-        width: 120px; /* Imagem ainda menor em telas pequenas */
-        height: 120px;
-        margin-top: 20px;
+        margin-top: 10px;
+    }
+
+    .text-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .text-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sobre {
+        padding: 0;
+    }
+
+    .about-container {
+        padding: 5px 5px;
+    }
+
+    .profile-image {
+        margin-top: 10px;
+    }
+
+    .text-content {
+        margin-top: 10px;
+    }
+
+    .text-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .text-content p {
+        font-size: 1rem;
     }
 }

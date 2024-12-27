@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useScrollAnimation = (elementSelector = '#contato') => { // Default para #contato
+const useScrollAnimation = (elementSelector = '#contato') => { 
   useEffect(() => {
     const elements = document.querySelectorAll(elementSelector);
 
@@ -10,7 +10,7 @@ const useScrollAnimation = (elementSelector = '#contato') => { // Default para #
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.5 }); // 50% do elemento visível
+    }, { threshold: 0.4 }); // 40% do elemento visível
 
     elements.forEach(element => {
       observer.observe(element);
@@ -18,7 +18,7 @@ const useScrollAnimation = (elementSelector = '#contato') => { // Default para #
 
     return () => {
       elements.forEach(element => {
-        observer.unobserve(element); // Limpar a observação ao desmontar
+        observer.unobserve(element); 
       });
     };
   }, [elementSelector]);

@@ -1,54 +1,73 @@
-/* Importando a fonte futurista e tecnológica */
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
 
-/* Estilos gerais do header */
 .header {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 2rem;
     background: linear-gradient(260deg, rgba(0,2,78,1) 0%, rgba(87,46,0,1) 100%);
     color: #fff;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 350px;
     font-family: 'Rajdhani', sans-serif;
+    min-height: 400px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-/* Nome do profissional */
 .professional-name {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-family: 'Rajdhani', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 4px solid #fff;
+    width: 0;
+    animation: typing 1.8s steps(15) 0.5s forwards, cursorDisappear 2s 3s forwards;
 }
 
-/* Profissão/descrição */
-.professional-crp {
-    font-size: 1.5rem;
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes cursorDisappear {
+    0% {
+        border-right: 4px solid #fff;
+    }
+    100% {
+        border-right: 4px solid transparent;
+    }
+}
+
+.professional {
+    font-size: 1.8rem;
     color: #ddd;
     margin-bottom: 1rem;
     font-family: 'Rajdhani', sans-serif;
 }
 
-/* Frase de chamada (CTA) */
 .cta-phrase {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #fff;
     font-style: normal;
     margin-bottom: 1.5rem;
     font-family: 'Rajdhani', sans-serif;
 }
 
-/* Botão do WhatsApp */
 .whatsapp-button {
     display: inline-block;
     padding: 1rem 2rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #004d7a;
     text-decoration: none;
@@ -62,7 +81,6 @@
     font-family: 'Rajdhani', sans-serif;
 }
 
-/* Efeito de hover para o botão */
 .whatsapp-button:hover {
     color: #fff;
     transform: scale(1.05);
@@ -85,17 +103,24 @@
     left: 0;
 }
 
-/* Estilo responsivo */
 @media (max-width: 768px) {
     .whatsapp-button {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .professional-name {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+    }
+
+    .professional {
+        font-size: 1.6rem;
+    }
+
+    .cta-phrase {
+        font-size: 1.2rem;
     }
 
     .header {
-        height: 340px;
+        min-height: auto;
     }
 }

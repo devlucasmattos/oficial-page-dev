@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import './Contact.css';
-import useScrollAnimation from '../hooks/useScrollAnimation'; // Importando o hook
+import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa"; 
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 function Contact() {
-  // Usando o hook para detectar se a seção está visível
   const isVisible = useScrollAnimation();
 
   return (
@@ -11,18 +11,24 @@ function Contact() {
       className={`contact ${isVisible ? "visible" : ""}`} 
       id="contato"
     >
-      <h2>Vamos fazer acontecer!</h2>
-      <p>Estou pronto para ajudar a levar seu projeto para o próximo nível!<br /> Entre em contato através das minhas redes sociais<br /> ou agende uma consultoria. ⤵️</p>
+      <h2 className={`contact ${isVisible ? "visible" : ""}`} id="contato">
+        Vamos fazer acontecer!
+      </h2>
+      <p>
+        Estou pronto para ajudar a levar seu projeto para o próximo nível!<br /> 
+        Entre em contato através das minhas redes sociais<br /> 
+        ou agende uma consultoria. ⤵️
+      </p>
 
       <div className="social-icons">
-        <a href="https://wa.me/message/3YQT5VMFXFKHI1" className="social-icon whatsapp" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-whatsapp"></i> {/* Ícone do WhatsApp */}
+        <a href="https://wa.me/+5553991244320?text=Ol%C3%A1%2C%20gostaria%20de%20realizar%20or%C3%A7amento%20para%20a%20cria%C3%A7%C3%A3o%20de%20um%20site." className="social-icon whatsapp" target="_blank" rel="noopener noreferrer">
+          <FaWhatsapp />
         </a>
-        <a href="https://www.linkedin.com/in/lucasmattos" className="social-icon linkedin" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-linkedin"></i> {/* Ícone do LinkedIn */}
+        <a href="https://www.linkedin.com/in/devlucasmattos/" className="social-icon linkedin" target="_blank" rel="noopener noreferrer">
+          <FaLinkedin />
         </a>
-        <a href="https://github.com/lucasmattos" className="social-icon github" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-github"></i> {/* Ícone do GitHub */}
+        <a href="https://github.com/devlucasmattos" className="social-icon github" target="_blank" rel="noopener noreferrer">
+          <FaGithub />
         </a>
       </div>
     </section>

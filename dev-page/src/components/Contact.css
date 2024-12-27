@@ -1,30 +1,32 @@
-/* Contact.css */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
 
-/* Estilos para a seção de contato */
 .contact {
   text-align: center;
   padding: 30px 20px;
-  background-color: #f4f4f9;
-  opacity: 0; /* Inicialmente invisível */
-  transform: translateY(50px); /* Inicialmente deslocado para baixo */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Transições suaves */
+  background-color: #1F1F1F;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .contact.visible {
-  opacity: 1; /* Torna o elemento visível */
-  transform: translateY(0); /* Move para a posição original */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contact h2 {
   font-size: 2.1rem;
-  color: #004d7a;
+  color: #e9e9e9;
   margin-bottom: 20px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .contact p {
   font-size: 1.2rem;
-  color: #555;
+  color: #e9e9e9;
   margin-bottom: 30px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .social-icons {
@@ -37,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px; /* Tamanho fixo dos ícones */
+  width: 60px;
   height: 60px;
   font-size: 2rem;
   color: #333;
@@ -48,22 +50,36 @@
 }
 
 .social-icon:hover {
-  transform: scale(1.2); /* Efeito de zoom in */
+  transform: scale(1.2);
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  .social-icon {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-icon {
+    max-width: 45px;
+    max-height: 45px;
+  }
+}
+
 .whatsapp:hover {
-  background-color: #25D366; /* Cor do WhatsApp */
+  background-color: #25D366;
 }
 
 .linkedin:hover {
-  background-color: #0077b5; /* Cor do LinkedIn */
+  background-color: #0077b5;
 }
 
 .github:hover {
-  background-color: #333; /* Cor do GitHub */
+  background-color: #333;
 }
 
 .social-icon i {
-  font-size: 2rem;
+  font-size: inherit;
 }
