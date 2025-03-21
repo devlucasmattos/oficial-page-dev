@@ -1,0 +1,24 @@
+.links-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .links-container a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .links-container a:hover {
+    background: #0056b3;
+  }
+  
