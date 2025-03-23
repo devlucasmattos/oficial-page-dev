@@ -1,0 +1,22 @@
+{
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "destination": "/index.html"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/links",
+        "permanent": true,
+        "has": [
+          {
+            "type": "host",
+            "value": "links.devlucasmattos.com"
+          }
+        ]
+      }
+    ]
+  }
+  
