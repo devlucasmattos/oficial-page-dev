@@ -38,13 +38,31 @@ body {
   z-index: 1;
 }
 
+.profile-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  z-index: 1;
+}
+
+.profile-image {
+  width: 200px; /* Ajuste o tamanho conforme necessário */
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid white;
+}
+
+
 .links-header, .links-content {
   position: relative;
   z-index: 2;
 }
 
 .links-header {
-  margin-top: 10%; 
+  margin-top: 2%; 
 }
 
 .links-header h1 {
@@ -109,5 +127,11 @@ body {
 
   .link-btn .icon {
     font-size: 18px; 
+  }
+
+  .profile-image {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: 150px;
+    
   }
 }

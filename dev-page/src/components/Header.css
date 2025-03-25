@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
 
 .header {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    background: linear-gradient(260deg, rgba(0,2,78,1) 0%, rgba(87,46,0,1) 100%);
+    background: url('/videos/videobackground.gif') center/cover no-repeat;
     color: #fff;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -15,6 +16,23 @@
     box-sizing: border-box;
     width: 100%;
 }
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* Ajuste a opacidade conforme necessário */
+    z-index: 1;
+}
+
+.header * {
+    position: relative;
+    z-index: 2;
+}
+
 
 .professional-name {
     font-size: 3.5rem;
@@ -93,7 +111,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(260deg, rgba(0,1,47,1) 0%, rgba(66,35,0,1) 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.9500175070028011) 0%, rgba(41,91,36,0.9500175070028011) 71%, rgba(36,126,25,0.9500175070028011) 87%, rgba(31,173,16,0.9500175070028011) 100%);
     border-radius: inherit;
     z-index: -1;
     transition: left 0.7s ease;

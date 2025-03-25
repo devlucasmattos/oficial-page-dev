@@ -10,7 +10,7 @@ const useScrollAnimation = (elementSelector = '#contato') => {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.4 }); // 40% do elemento visível
+    }, { threshold: 0.20 }); // 35% do elemento visível
 
     elements.forEach(element => {
       observer.observe(element);

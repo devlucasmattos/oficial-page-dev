@@ -5,6 +5,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import About from './components/About';
 import Links from './components/Links';
+import Formulario from './components/Formulario';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </>
         } />
         <Route path="/links" element={<Links />} /> 
+        <Route path="/formulario" element={<Formulario />} /> 
       </Routes>
     </Router>
   );

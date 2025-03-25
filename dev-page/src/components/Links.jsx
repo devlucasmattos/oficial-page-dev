@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './Links.css';
-import { FaWhatsapp, FaGlobe, FaGithub } from "react-icons/fa"; 
+import { FaWhatsapp, FaGlobe, FaGithub } from "react-icons/fa";
 
 function Links() {
   useEffect(() => {
@@ -12,6 +12,9 @@ function Links() {
 
   return (
     <div className="links-container">
+      <div className="profile-image-container">
+        <img src="/images/profile-dev.png" alt="Perfil" className="profile-image" />
+      </div>
       <div className="links-header">
         <h1>Lucas Mattos</h1>
         <p>Desenvolvedor de sistemas</p>
@@ -23,7 +26,7 @@ function Links() {
         </a>
         <a href="https://devlucasmattos.com/" className="link-btn">
           <FaGlobe className="icon" /> 
-          Portifólio
+          Portfólio
         </a>
         <a href="https://github.com/devlucasmattos" className="link-btn">
           <FaGithub className="icon" />
