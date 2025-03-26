@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap'); 
 
 .services-container {
-  background-color: #1a1a1a;
-  padding: 20px;
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(43,43,43,1) 25%, rgba(43,43,43,1) 75%, rgba(0,0,0,1) 100%);  padding: 20px;
   width: 100%;
   max-width: 1820px;
   overflow: hidden;

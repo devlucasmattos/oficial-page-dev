@@ -12,8 +12,7 @@
 }
 
 .sobre {
-    background-color: #1F1F1F;
-    padding: 10px 0;
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(56,57,56,1) 25%, rgba(56,57,56,1) 75%, rgba(0,0,0,1) 100%);    padding: 10px 0;
     font-family: 'Rajdhani', sans-serif;
     display: flex;
     flex-direction: column;
