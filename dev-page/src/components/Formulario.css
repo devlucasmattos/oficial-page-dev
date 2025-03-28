@@ -11,9 +11,9 @@
     padding: 20px 0 80px 0;
     background-color: #1E1E1E;
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    flex-direction: column; /* Organiza os itens em uma coluna */
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
   }
   
   .formulario-container h1 {
@@ -33,7 +33,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-/* Mantendo o estilo básico de bordas e fundo */
+
 form input,
 form select,
 form textarea {
@@ -48,28 +48,28 @@ form textarea {
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Aplica o erro no input, select ou textarea */
+
 form input.error,
 form select.error,
 form textarea.error {
-  border-color: #ff6b6b !important; /* Redefine a cor da borda para vermelho */
-  background-color: #fff0f0; /* Fundo rosa claro */
+  border-color: #ff6b6b !important; 
+  background-color: #fff0f0; 
 }
 
-/* Foco para erro não sobrescrever a borda vermelha */
+
 form input:focus.error,
 form select:focus.error,
 form textarea:focus.error {
-  border-color: #ff6b6b !important; /* Garante que a borda vermelha seja aplicada ao focar */
+  border-color: #ff6b6b !important; 
   background-color: #fff0f0;
-  outline: none; /* Remove o outline do foco */
+  outline: none; 
 }
 
-/* Foco geral (quando não há erro) */
+
 form input:focus,
 form select:focus,
 form textarea:focus {
-  border-color: #1db954; /* Verde de foco */
+  border-color: #1db954; 
   background-color: #1c1c1c;
   outline: none;
 }
