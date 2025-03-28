@@ -20,8 +20,19 @@ function App() {
             <Footer />
           </>
         } />
-        <Route path="/links" element={<Links />} /> 
-        <Route path="/formulario" element={<Formulario />} /> 
+        <Route path="/links" element={
+          <>
+            
+            <Links />
+            <Footer />
+          </>
+        } />
+        <Route path="/formulario" element={
+          <>
+            <Formulario />
+            <Footer />
+          </>
+        } />
       </Routes>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import InputMask from 'react-input-mask';
 import './Formulario.css';
 
 function Formulario() {
@@ -15,222 +16,611 @@ function Formulario() {
     telefone: '',
     cidade: '',
     profissao: '',
+    areaAtuacao: '',
     cnpj: '',
+    cnpjNumero: '',
     empresa: '',
-    tempoAtuacao: '',
+    tempoAtuacaoNumero: '',
+    tempoAtuacaoPeriodo: 'meses',
     servicos: '',
+    publicoAlvo: '',
     doresClientes: '',
     logotipo: '',
     slogan: '',
     cores: '',
     referencia: '',
-    redesSociais: '',
+    instagram: '',
+    facebook: '',
+    linkedin: '',
+    tiktok: '',
+    youtube: '',
     objetivo: '',
     depoimentos: '',
-    oferta: '',
-    blog: ''
+    oferta: ''
   });
 
   const [errors, setErrors] = useState({});
+  const [showCNPJField, setShowCNPJField] = useState(false);
+
+  // Carregar rascunho ao iniciar
+  useEffect(() => {
+    const rascunho = localStorage.getItem('formularioRascunho');
+    if (rascunho) {
+      setFormData(JSON.parse(rascunho));
+      if (JSON.parse(rascunho).cnpj === 'Sim') {
+        setShowCNPJField(true);
+      }
+    }
+  }, []);
+
+  // Salvar rascunho
+  useEffect(() => {
+    localStorage.setItem('formularioRascunho', JSON.stringify(formData));
+  }, [formData]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if (name === 'cnpj') {
+      setShowCNPJField(value === 'Sim');
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    let error = false;
+    let errorMessage = '';
+
+    // Campos obrigatórios (exceto redes sociais e alguns específicos)
+    const optionalFields = [
+      'empresa', 'cnpjNumero', 'instagram', 'facebook', 
+      'linkedin', 'tiktok', 'youtube', 'slogan', 'cores',
+      'referencia', 'oferta', 'publicoAlvo', 'areaAtuacao'
+    ];
+
+    if (value === '' && !optionalFields.includes(name)) {
+      error = true;
+      errorMessage = 'Este campo é obrigatório.';
+    }
+
+    // Validações específicas
+    if (name === 'email' && value && !/\S+@\S+\.\S+/.test(value)) {
+      error = true;
+      errorMessage = 'O e-mail informado é inválido.';
+    }
+
+    if (name === 'telefone' && value && value.replace(/\D/g, '').length < 11) {
+      error = true;
+      errorMessage = 'O telefone deve ter 11 dígitos.';
+    }
+
+    if ((name === 'nome' || name === 'profissao' || name === 'cidade') && value && value.length < 3) {
+      error = true;
+      errorMessage = 'O campo deve ter no mínimo 3 caracteres.';
+    }
+
+    if ((name === 'tempoAtuacaoNumero') && value && isNaN(value)) {
+      error = true;
+      errorMessage = 'Informe um número válido.';
+    }
+
+    setErrors({ ...errors, [name]: { error, errorMessage } });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let formErrors = {};
+    let hasErrors = false;
+    const newErrors = {};
+
+    // Validação geral antes de enviar
     Object.keys(formData).forEach((key) => {
-      if (formData[key] === '') {
-        formErrors[key] = true;
+      const value = formData[key];
+      const optionalFields = [
+        'empresa', 'cnpjNumero', 'instagram', 'facebook', 
+        'linkedin', 'tiktok', 'youtube', 'slogan', 'cores',
+        'referencia', 'oferta', 'publicoAlvo', 'areaAtuacao'
+      ];
+
+      if (value === '' && !optionalFields.includes(key)) {
+        newErrors[key] = { error: true, errorMessage: 'Este campo é obrigatório.' };
+        hasErrors = true;
       }
     });
 
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-    } else {
-      const message = encodeURIComponent(
-        `Novo formulário preenchido:\n\n` +
-        `Nome: ${formData.nome}\n` +
-        `E-mail: ${formData.email}\n` +
-        `Telefone: ${formData.telefone}\n` +
-        `Cidade: ${formData.cidade}\n` +
-        `Profissão: ${formData.profissao}\n` +
-        `Possui CNPJ? ${formData.cnpj}\n` +
-        `Empresa: ${formData.empresa}\n` +
-        `Tempo de atuação: ${formData.tempoAtuacao}\n` +
-        `Serviços oferecidos: ${formData.servicos}\n` +
-        `Principais dores dos clientes: ${formData.doresClientes}\n` +
-        `Possui logotipo? ${formData.logotipo}\n` +
-        `Slogan: ${formData.slogan}\n` +
-        `Cores preferidas: ${formData.cores}\n` +
-        `Referência de site: ${formData.referencia}\n` +
-        `Redes sociais: ${formData.redesSociais}\n` +
-        `Objetivo da página: ${formData.objetivo}\n` +
-        `Incluir depoimentos? ${formData.depoimentos}\n` +
-        `Oferta especial: ${formData.oferta}\n` +
-        `Incluir blog? ${formData.blog}`
-      );
-      window.open(`https://wa.me/5553991244320?text=${message}`, '_blank');
+    if (hasErrors) {
+      setErrors(newErrors);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
+
+    // Formatar mensagem para WhatsApp
+    const message = `Novo formulário preenchido:\n\n` +
+      `*Dados Pessoais*\n` +
+      `Nome: ${formData.nome}\n` +
+      `E-mail: ${formData.email}\n` +
+      `Telefone: ${formData.telefone}\n` +
+      `Cidade: ${formData.cidade}\n\n` +
+      `*Dados Profissionais*\n` +
+      `Profissão: ${formData.profissao}\n` +
+      `Área de Atuação: ${formData.areaAtuacao || 'Não informado'}\n` +
+      `Possui CNPJ? ${formData.cnpj}\n` +
+      `CNPJ: ${formData.cnpj === 'Sim' ? formData.cnpjNumero : 'Não informado'}\n` +
+      `Empresa: ${formData.empresa || 'Não informado'}\n` +
+      `Tempo de atuação: ${formData.tempoAtuacaoNumero} ${formData.tempoAtuacaoPeriodo}\n` +
+      `Público-alvo: ${formData.publicoAlvo || 'Não informado'}\n\n` +
+      `*Serviços*\n` +
+      `Serviços oferecidos: ${formData.servicos}\n` +
+      `Principais dores dos clientes: ${formData.doresClientes}\n\n` +
+      `*Identidade Visual*\n` +
+      `Possui logotipo? ${formData.logotipo}\n` +
+      `Slogan: ${formData.slogan || 'Não informado'}\n` +
+      `Cores preferidas: ${formData.cores || 'Não informado'}\n` +
+      `Referência de site: ${formData.referencia || 'Não informado'}\n\n` +
+      `*Redes Sociais*\n` +
+      `Instagram: ${formData.instagram || 'Não informado'}\n` +
+      `Facebook: ${formData.facebook || 'Não informado'}\n` +
+      `LinkedIn: ${formData.linkedin || 'Não informado'}\n` +
+      `TikTok: ${formData.tiktok || 'Não informado'}\n` +
+      `YouTube: ${formData.youtube || 'Não informado'}\n\n` +
+      `*Objetivos*\n` +
+      `Objetivo da página: ${formData.objetivo}\n` +
+      `Incluir depoimentos? ${formData.depoimentos}\n` +
+      `Oferta especial: ${formData.oferta || 'Não informado'}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/5553991244320?text=${encodedMessage}`, '_blank');
+  };
+
+  const resetForm = () => {
+    setFormData({
+      nome: '',
+      email: '',
+      telefone: '',
+      cidade: '',
+      profissao: '',
+      areaAtuacao: '',
+      cnpj: '',
+      cnpjNumero: '',
+      empresa: '',
+      tempoAtuacaoNumero: '',
+      tempoAtuacaoPeriodo: 'meses',
+      servicos: '',
+      publicoAlvo: '',
+      doresClientes: '',
+      logotipo: '',
+      slogan: '',
+      cores: '',
+      referencia: '',
+      instagram: '',
+      facebook: '',
+      linkedin: '',
+      tiktok: '',
+      youtube: '',
+      objetivo: '',
+      depoimentos: '',
+      oferta: ''
+    });
+    setErrors({});
+    setShowCNPJField(false);
+    localStorage.removeItem('formularioRascunho');
   };
 
   return (
     <div className="formulario-container">
       <h1>Preencha seu formulário</h1>
+      <p className="obrigatorio-info">Campos marcados com * são obrigatórios</p>
+      
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="nome"
-          placeholder="Nome completo"
-          onChange={handleChange}
-          className={errors.nome ? 'error' : ''}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="E-mail"
-          onChange={handleChange}
-          className={errors.email ? 'error' : ''}
-          required
-        />
-        <input
-          type="tel"
-          name="telefone"
-          placeholder="Telefone/WhatsApp"
-          onChange={handleChange}
-          className={errors.telefone ? 'error' : ''}
-          required
-        />
-        <input
-          type="text"
-          name="cidade"
-          placeholder="Cidade e Estado"
-          onChange={handleChange}
-          className={errors.cidade ? 'error' : ''}
-          required
-        />
-        <input
-          type="text"
-          name="profissao"
-          placeholder="Profissão"
-          onChange={handleChange}
-          className={errors.profissao ? 'error' : ''}
-          required
-        />
-        <select
-          name="cnpj"
-          onChange={handleChange}
-          className={errors.cnpj ? 'error' : ''}
-          required
-        >
-          <option value="">Possui CNPJ?</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-        <input
-          type="text"
-          name="empresa"
-          placeholder="Nome da empresa (se aplicável)"
-          onChange={handleChange}
-          className={errors.empresa ? 'error' : ''}
-        />
-        <input
-          type="text"
-          name="tempoAtuacao"
-          placeholder="Tempo de atuação"
-          onChange={handleChange}
-          className={errors.tempoAtuacao ? 'error' : ''}
-          required
-        />
-        <textarea
-          name="servicos"
-          placeholder="Serviços oferecidos"
-          onChange={handleChange}
-          className={errors.servicos ? 'error' : ''}
-          required
-        ></textarea>
-        <textarea
-          name="doresClientes"
-          placeholder="Principais dores dos clientes"
-          onChange={handleChange}
-          className={errors.doresClientes ? 'error' : ''}
-          required
-        ></textarea>
-        <select
-          name="logotipo"
-          onChange={handleChange}
-          className={errors.logotipo ? 'error' : ''}
-          required
-        >
-          <option value="">Possui logotipo?</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-        <input
-          type="text"
-          name="slogan"
-          placeholder="Slogan (se tiver)"
-          onChange={handleChange}
-          className={errors.slogan ? 'error' : ''}
-        />
-        <input
-          type="text"
-          name="cores"
-          placeholder="Cores preferidas"
-          onChange={handleChange}
-          className={errors.cores ? 'error' : ''}
-          required
-        />
-        <input
-          type="url"
-          name="referencia"
-          placeholder="Referência de site"
-          onChange={handleChange}
-          className={errors.referencia ? 'error' : ''}
-        />
-        <textarea
-          name="redesSociais"
-          placeholder="Links das redes sociais"
-          onChange={handleChange}
-          className={errors.redesSociais ? 'error' : ''}
-        ></textarea>
-        <input
-          type="text"
-          name="objetivo"
-          placeholder="Objetivo da página"
-          onChange={handleChange}
-          className={errors.objetivo ? 'error' : ''}
-          required
-        />
-        <select
-          name="depoimentos"
-          onChange={handleChange}
-          className={errors.depoimentos ? 'error' : ''}
-          required
-        >
-          <option value="">Incluir depoimentos?</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-        <input
-          type="text"
-          name="oferta"
-          placeholder="Oferta especial (se houver)"
-          onChange={handleChange}
-          className={errors.oferta ? 'error' : ''}
-        />
-        <select
-          name="blog"
-          onChange={handleChange}
-          className={errors.blog ? 'error' : ''}
-        >
-          <option value="">Incluir blog?</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-        <button type="submit">Enviar</button>
+        <fieldset>
+          <legend>Dados Pessoais</legend>
+          
+          <div className="form-group">
+            <label htmlFor="nome">Nome completo *</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              value={formData.nome}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.nome?.error ? 'error' : ''}
+              autoFocus
+            />
+            {errors.nome?.error && <small className="error-message">{errors.nome.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">E-mail *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.email?.error ? 'error' : ''}
+            />
+            {errors.email?.error && <small className="error-message">{errors.email.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="telefone">Telefone/WhatsApp *</label>
+            <InputMask
+              mask="(99) 99999-9999"
+              id="telefone"
+              name="telefone"
+              value={formData.telefone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.telefone?.error ? 'error' : ''}
+            />
+            {errors.telefone?.error && <small className="error-message">{errors.telefone.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="cidade">Cidade e Estado *</label>
+            <input
+              type="text"
+              id="cidade"
+              name="cidade"
+              value={formData.cidade}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.cidade?.error ? 'error' : ''}
+            />
+            {errors.cidade?.error && <small className="error-message">{errors.cidade.errorMessage}</small>}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Dados Profissionais</legend>
+          
+          <div className="form-group">
+            <label htmlFor="profissao">Profissão *</label>
+            <input
+              type="text"
+              id="profissao"
+              name="profissao"
+              value={formData.profissao}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.profissao?.error ? 'error' : ''}
+            />
+            {errors.profissao?.error && <small className="error-message">{errors.profissao.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="areaAtuacao">Área de Atuação</label>
+            <select
+              id="areaAtuacao"
+              name="areaAtuacao"
+              value={formData.areaAtuacao}
+              onChange={handleChange}
+            >
+              <option value="">Selecione...</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Tecnologia">Tecnologia</option>
+              <option value="Educação">Educação</option>
+              <option value="Finanças">Finanças</option>
+              <option value="Comércio">Comércio</option>
+              <option value="Serviços">Serviços</option>
+              <option value="Indústria">Indústria</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="cnpj">Possui CNPJ? *</label>
+            <select
+              id="cnpj"
+              name="cnpj"
+              value={formData.cnpj}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.cnpj?.error ? 'error' : ''}
+            >
+              <option value="">Selecione...</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+            {errors.cnpj?.error && <small className="error-message">{errors.cnpj.errorMessage}</small>}
+          </div>
+
+          {showCNPJField && (
+            <div className="form-group">
+              <label htmlFor="cnpjNumero">CNPJ *</label>
+              <InputMask
+                mask="99.999.999/9999-99"
+                id="cnpjNumero"
+                name="cnpjNumero"
+                value={formData.cnpjNumero}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.cnpjNumero?.error ? 'error' : ''}
+              />
+              {errors.cnpjNumero?.error && <small className="error-message">{errors.cnpjNumero.errorMessage}</small>}
+            </div>
+          )}
+
+          <div className="form-group">
+            <label htmlFor="empresa">Nome da Empresa</label>
+            <input
+              type="text"
+              id="empresa"
+              name="empresa"
+              value={formData.empresa}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="tempoAtuacao">Tempo de Atuação *</label>
+            <div className="tempo-atuacao-container">
+              <input
+                type="number"
+                id="tempoAtuacaoNumero"
+                name="tempoAtuacaoNumero"
+                min="1"
+                value={formData.tempoAtuacaoNumero}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.tempoAtuacaoNumero?.error ? 'error' : ''}
+                style={{ width: '60px', marginRight: '10px' }}
+              />
+              <select
+                name="tempoAtuacaoPeriodo"
+                value={formData.tempoAtuacaoPeriodo}
+                onChange={handleChange}
+              >
+                <option value="meses">Meses</option>
+                <option value="anos">Anos</option>
+              </select>
+            </div>
+            {errors.tempoAtuacaoNumero?.error && <small className="error-message">{errors.tempoAtuacaoNumero.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="publicoAlvo">Público-Alvo</label>
+            <textarea
+              id="publicoAlvo"
+              name="publicoAlvo"
+              placeholder="Descreva seu público ideal"
+              value={formData.publicoAlvo}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Serviços</legend>
+          
+          <div className="form-group">
+            <label htmlFor="servicos">Serviços oferecidos *</label>
+            <textarea
+              id="servicos"
+              name="servicos"
+              placeholder="Descreva os serviços que você oferece"
+              value={formData.servicos}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.servicos?.error ? 'error' : ''}
+            />
+            {errors.servicos?.error && <small className="error-message">{errors.servicos.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="doresClientes">Principais dores dos clientes *</label>
+            <textarea
+              id="doresClientes"
+              name="doresClientes"
+              placeholder="Quais são os principais problemas que seus clientes enfrentam?"
+              value={formData.doresClientes}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.doresClientes?.error ? 'error' : ''}
+            />
+            {errors.doresClientes?.error && <small className="error-message">{errors.doresClientes.errorMessage}</small>}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Identidade Visual</legend>
+          
+          <div className="form-group">
+            <label htmlFor="logotipo">Possui logotipo? *</label>
+            <select
+              id="logotipo"
+              name="logotipo"
+              value={formData.logotipo}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.logotipo?.error ? 'error' : ''}
+            >
+              <option value="">Selecione...</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+            {errors.logotipo?.error && <small className="error-message">{errors.logotipo.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="slogan">Slogan</label>
+            <input
+              type="text"
+              id="slogan"
+              name="slogan"
+              placeholder="Seu slogan ou frase de impacto"
+              value={formData.slogan}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="cores">Cores preferidas</label>
+            <input
+              type="text"
+              id="cores"
+              name="cores"
+              placeholder="Ex: Azul, Branco e Prata"
+              value={formData.cores}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="referencia">Referência de site</label>
+            <input
+              type="text"
+              id="referencia"
+              name="referencia"
+              placeholder="URL de sites que você gosta"
+              value={formData.referencia}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Redes Sociais</legend>
+          
+          <div className="form-group">
+            <label htmlFor="instagram">
+              <i className="fab fa-instagram"></i> Instagram
+            </label>
+            <input
+              type="text"
+              id="instagram"
+              name="instagram"
+              placeholder="@seuuser ou URL"
+              value={formData.instagram}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="facebook">
+              <i className="fab fa-facebook"></i> Facebook
+            </label>
+            <input
+              type="text"
+              id="facebook"
+              name="facebook"
+              placeholder="URL do seu perfil/página"
+              value={formData.facebook}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="linkedin">
+              <i className="fab fa-linkedin"></i> LinkedIn
+            </label>
+            <input
+              type="text"
+              id="linkedin"
+              name="linkedin"
+              placeholder="URL do seu perfil"
+              value={formData.linkedin}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="tiktok">
+              <i className="fab fa-tiktok"></i> TikTok
+            </label>
+            <input
+              type="text"
+              id="tiktok"
+              name="tiktok"
+              placeholder="@seuuser ou URL"
+              value={formData.tiktok}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="youtube">
+              <i className="fab fa-youtube"></i> YouTube
+            </label>
+            <input
+              type="text"
+              id="youtube"
+              name="youtube"
+              placeholder="URL do seu canal"
+              value={formData.youtube}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Objetivos</legend>
+          
+          <div className="form-group">
+            <label htmlFor="objetivo">Objetivo da página *</label>
+            <textarea
+              id="objetivo"
+              name="objetivo"
+              placeholder="O que você espera alcançar com seu site?"
+              value={formData.objetivo}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.objetivo?.error ? 'error' : ''}
+            />
+            {errors.objetivo?.error && <small className="error-message">{errors.objetivo.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="depoimentos">Incluir depoimentos? *</label>
+            <select
+              id="depoimentos"
+              name="depoimentos"
+              value={formData.depoimentos}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.depoimentos?.error ? 'error' : ''}
+            >
+              <option value="">Selecione...</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+            {errors.depoimentos?.error && <small className="error-message">{errors.depoimentos.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="oferta">Oferta especial</label>
+            <input
+              type="text"
+              id="oferta"
+              name="oferta"
+              placeholder="Tem alguma promoção ou oferta especial?"
+              value={formData.oferta}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
+        </fieldset>
+
+        <div className="form-actions">
+          <button type="button" className="btn-reset" onClick={resetForm}>
+            Limpar Formulário
+          </button>
+          <button type="submit" className="btn-submit">
+            Enviar
+          </button>
+        </div>
       </form>
     </div>
   );
