@@ -1,7 +1,14 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <!-- Google Analytics - Rastreia os dados do seu site -->
+    <!-- Meta tags básicas -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Language" content="pt-BR">
+    <meta name="author" content="Lucas Mattos">
+    
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCDJM3SNMJ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -10,102 +17,152 @@
       gtag('config', 'G-SCDJM3SNMJ');
     </script>
 
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Language" content="pt-BR">
-
-    <!-- Importação de ícones Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-
-    <!-- Importação de fontes do Google Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    </noscript>
-
-    <!-- Permite indexação -->
+    <!-- SEO -->
+    <meta name="description" content="Lucas Mattos - Desenvolvedor Full Stack especializado em criação de sites profissionais, sistemas web e soluções digitais personalizadas. Desenvolvimento de alta performance para empresas e profissionais liberais.">
+    <meta name="keywords" content="desenvolvedor web, criação de sites, programador full stack, soluções digitais, desenvolvimento web, Lucas Mattos, devlucasmattos">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#ffffff">
+    <title>Lucas Mattos | Desenvolvedor Full Stack</title>
 
-    <!-- SEO -->
-    <meta name="description" content="Lucas Mattos – Desenvolvedor de sistemas especializado em soluções web. Criação de sites para empresas e profissionais. Transforme suas ideias em realidade digital hoje mesmo!" />
-    <meta name="keywords" content="desenvolvedor web, criação de sites, programador full stack, soluções digitais, desenvolvimento web">
-
-    <title>Lucas Mattos | Desenvolvedor de sistemas</title>
-
-    <!-- Link para o CSS -->
-    <link rel="stylesheet" href="/src/index.css" />
-
-    <!-- Favicon -->
-    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Lucas Mattos - Desenvolvedor de sistemas">
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Lucas Mattos - Desenvolvedor Full Stack">
     <meta property="og:description" content="Transforme suas ideias em realidade digital com soluções web de alta qualidade.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://devlucasmattos.github.io/oficial-page-dev/">
+    <meta property="og:url" content="https://devlucasmattos.com">
+    <meta property="og:image" content="https://devlucasmattos.com/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Lucas Mattos - Desenvolvedor Full Stack">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lucas Mattos - Desenvolvedor Full Stack">
+    <meta name="twitter:description" content="Transforme suas ideias em realidade digital com soluções web de alta qualidade.">
+    <meta name="twitter:image" content="https://devlucasmattos.com/images/og-image.jpg">
+    <meta name="twitter:creator" content="@devlucasmattos">
+
+    <!-- Pré-conexões -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- CSS crítico inline -->
+    <style>
+      body { margin: 0; font-family: 'Roboto', sans-serif; }
+      .container { position: relative; z-index: 1; }
+      #root { min-height: 100vh; }
+    </style>
+
+    <!-- Pré-carregamento de recursos -->
+    <link rel="preload" href="/src/index.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" as="style">
+
+    <!-- Fontes -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap">
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Favicon moderno -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Segurança -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="no-referrer-when-downgrade">
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Lucas Mattos - Desenvolvedor de sistemas",
-      "description": "Desenvolvedor de sistemas com foco em desenvolvimento web",
-      "areaServed": {
-        "@type": "Country",
-        "name": "Brasil"
+      "@type": "Person",
+      "name": "Lucas Mattos",
+      "jobTitle": "Desenvolvedor Full Stack",
+      "url": "https://devlucasmattos.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/devlucasmattos/",
+        "https://github.com/devlucasmattos"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BR",
+        "addressRegion": "Rio Grande do Sul"
       },
+      "email": "mailto:lucasmattos312@gmail.com",
       "telephone": "+55-53-991244320",
-      "url": "https://devlucasmattos.github.io/oficial-page-dev/"
+      "description": "Desenvolvedor Full Stack especializado em criação de sites profissionais e sistemas web",
+      "offers": {
+        "@type": "Offer",
+        "category": "DesenvolvimentoWeb",
+        "url": "https://devlucasmattos.com#contato"
+      }
     }
     </script>
   </head>
 
-  <body lang="pt-BR">
-    <!-- Div para partículas -->
-    <div id="particles-js"></div>
+  <body lang="pt-BR" role="document">
+    <!-- Partículas (background decorativo) -->
+    <div id="particles-js" aria-hidden="true"></div>
 
     <!-- Conteúdo principal -->
-    <div class="container">
-      <div id="root"></div>
+    <div class="container" role="main">
+      <div id="root" role="region" aria-label="Conteúdo principal"></div>
     </div>
 
     <!-- Script de Partículas -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script>
-      particlesJS("particles-js", {
-        particles: {
-          number: { value: 100, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffffff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5, random: true },
-          size: { value: 3, random: true },
-          move: {
-            enable: true,
-            speed: 1.5,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out"
-          }
-        },
-        interactivity: {
-          events: {
-            onhover: { enable: true, mode: "repulse" },
-            onclick: { enable: true, mode: "push" }
+      document.addEventListener('DOMContentLoaded', function() {
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: "#1db954" },
+            shape: { type: "circle" },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
+            move: {
+              enable: true,
+              speed: 1.5,
+              direction: "none",
+              random: false,
+              straight: false,
+              out_mode: "out"
+            }
           },
-          modes: {
-            repulse: { distance: 100 },
-            push: { particles_nb: 4 }
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: true, mode: "push" }
+            },
+            modes: {
+              repulse: { distance: 100 },
+              push: { particles_nb: 4 }
+            }
           }
-        }
+        });
       });
     </script>
 
     <!-- Script principal do React -->
     <script type="module" src="/src/main.jsx" defer></script>
+
+    <!-- Web Vitals (opcional) -->
+    <script src="https://unpkg.com/web-vitals@1.1.0/dist/web-vitals.umd.js" defer></script>
+    <script>
+    window.addEventListener('load', function() {
+      if (window.webVitals) {
+        webVitals.getCLS(console.log);
+        webVitals.getFID(console.log);
+        webVitals.getLCP(console.log);
+      }
+    });
+    </script>
   </body>
 </html>
