@@ -24,7 +24,6 @@ function App() {
           <>
             
             <Links />
-            <Footer />
           </>
         } />
         <Route path="/formulario" element={

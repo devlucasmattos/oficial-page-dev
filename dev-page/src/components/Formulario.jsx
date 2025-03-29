@@ -36,20 +36,24 @@ function Formulario() {
     youtube: '',
     objetivo: '',
     depoimentos: '',
-    oferta: ''
+    oferta: '',
+    atendimentoOnline: '',
+    registroProfissional: '',
+    numeroRegistro: ''
   });
 
   const [errors, setErrors] = useState({});
   const [showCNPJField, setShowCNPJField] = useState(false);
+  const [showRegistroField, setShowRegistroField] = useState(false);
 
   // Carregar rascunho ao iniciar
   useEffect(() => {
     const rascunho = localStorage.getItem('formularioRascunho');
     if (rascunho) {
-      setFormData(JSON.parse(rascunho));
-      if (JSON.parse(rascunho).cnpj === 'Sim') {
-        setShowCNPJField(true);
-      }
+      const parsedData = JSON.parse(rascunho);
+      setFormData(parsedData);
+      if (parsedData.cnpj === 'Sim') setShowCNPJField(true);
+      if (parsedData.registroProfissional === 'Sim') setShowRegistroField(true);
     }
   }, []);
 
@@ -65,6 +69,10 @@ function Formulario() {
     if (name === 'cnpj') {
       setShowCNPJField(value === 'Sim');
     }
+    
+    if (name === 'registroProfissional') {
+      setShowRegistroField(value === 'Sim');
+    }
   };
 
   const handleBlur = (e) => {
@@ -76,7 +84,8 @@ function Formulario() {
     const optionalFields = [
       'empresa', 'cnpjNumero', 'instagram', 'facebook', 
       'linkedin', 'tiktok', 'youtube', 'slogan', 'cores',
-      'referencia', 'oferta', 'publicoAlvo', 'areaAtuacao'
+      'referencia', 'oferta', 'publicoAlvo', 'areaAtuacao',
+      'numeroRegistro'
     ];
 
     if (value === '' && !optionalFields.includes(name)) {
@@ -119,7 +128,8 @@ function Formulario() {
       const optionalFields = [
         'empresa', 'cnpjNumero', 'instagram', 'facebook', 
         'linkedin', 'tiktok', 'youtube', 'slogan', 'cores',
-        'referencia', 'oferta', 'publicoAlvo', 'areaAtuacao'
+        'referencia', 'oferta', 'publicoAlvo', 'areaAtuacao',
+        'numeroRegistro'
       ];
 
       if (value === '' && !optionalFields.includes(key)) {
@@ -148,6 +158,9 @@ function Formulario() {
       `CNPJ: ${formData.cnpj === 'Sim' ? formData.cnpjNumero : 'Não informado'}\n` +
       `Empresa: ${formData.empresa || 'Não informado'}\n` +
       `Tempo de atuação: ${formData.tempoAtuacaoNumero} ${formData.tempoAtuacaoPeriodo}\n` +
+      `Realiza atendimento online? ${formData.atendimentoOnline}\n` +
+      `Possui registro profissional? ${formData.registroProfissional}\n` +
+      `${formData.registroProfissional === 'Sim' ? `Número do registro: ${formData.numeroRegistro || 'Não informado'}\n` : ''}` +
       `Público-alvo: ${formData.publicoAlvo || 'Não informado'}\n\n` +
       `*Serviços*\n` +
       `Serviços oferecidos: ${formData.servicos}\n` +
@@ -170,40 +183,6 @@ function Formulario() {
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5553991244320?text=${encodedMessage}`, '_blank');
-  };
-
-  const resetForm = () => {
-    setFormData({
-      nome: '',
-      email: '',
-      telefone: '',
-      cidade: '',
-      profissao: '',
-      areaAtuacao: '',
-      cnpj: '',
-      cnpjNumero: '',
-      empresa: '',
-      tempoAtuacaoNumero: '',
-      tempoAtuacaoPeriodo: 'meses',
-      servicos: '',
-      publicoAlvo: '',
-      doresClientes: '',
-      logotipo: '',
-      slogan: '',
-      cores: '',
-      referencia: '',
-      instagram: '',
-      facebook: '',
-      linkedin: '',
-      tiktok: '',
-      youtube: '',
-      objetivo: '',
-      depoimentos: '',
-      oferta: ''
-    });
-    setErrors({});
-    setShowCNPJField(false);
-    localStorage.removeItem('formularioRascunho');
   };
 
   return (
@@ -311,6 +290,56 @@ function Formulario() {
           </div>
 
           <div className="form-group">
+            <label htmlFor="atendimentoOnline">Realiza atendimento online? *</label>
+            <select
+              id="atendimentoOnline"
+              name="atendimentoOnline"
+              value={formData.atendimentoOnline}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.atendimentoOnline?.error ? 'error' : ''}
+            >
+              <option value="">Selecione...</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+              <option value="Ambos">Presencial e Online</option>
+            </select>
+            {errors.atendimentoOnline?.error && <small className="error-message">{errors.atendimentoOnline.errorMessage}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="registroProfissional">Possui registro profissional? (ex: CRP para psicólogos) *</label>
+            <select
+              id="registroProfissional"
+              name="registroProfissional"
+              value={formData.registroProfissional}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.registroProfissional?.error ? 'error' : ''}
+            >
+              <option value="">Selecione...</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+            {errors.registroProfissional?.error && <small className="error-message">{errors.registroProfissional.errorMessage}</small>}
+          </div>
+
+          {showRegistroField && (
+            <div className="form-group">
+              <label htmlFor="numeroRegistro">Número do registro profissional</label>
+              <input
+                type="text"
+                id="numeroRegistro"
+                name="numeroRegistro"
+                placeholder="Ex: CRP 00/00000"
+                value={formData.numeroRegistro}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+          )}
+
+          <div className="form-group">
             <label htmlFor="cnpj">Possui CNPJ? *</label>
             <select
               id="cnpj"
@@ -367,7 +396,6 @@ function Formulario() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={errors.tempoAtuacaoNumero?.error ? 'error' : ''}
-                style={{ width: '60px', marginRight: '10px' }}
               />
               <select
                 name="tempoAtuacaoPeriodo"
@@ -614,9 +642,6 @@ function Formulario() {
         </fieldset>
 
         <div className="form-actions">
-          <button type="button" className="btn-reset" onClick={resetForm}>
-            Limpar Formulário
-          </button>
           <button type="submit" className="btn-submit">
             Enviar
           </button>
