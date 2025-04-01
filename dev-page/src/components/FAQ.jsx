@@ -1,45 +1,94 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './FAQ.css';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const FAQ = () => {
     useScrollAnimation('.animated');
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState(null);
+    const faqRef = useRef(null);
 
     const questions = [
         {
             question: "Quanto tempo leva para desenvolver um site?",
-            answer: "O tempo varia conforme a complexidade. Sites institucionais simples levam 2-3 semanas, enquanto sistemas web completos podem levar 2-4 meses. Após análise do projeto, forneço um cronograma detalhado.",
-            tech: ["</> Prazos ágeis", "</> Entregas parceladas"]
+            answer: "Desenvolvemos sites institucionais em até 10 dias úteis. Projetos mais complexos como e-commerces podem levar de 2-3 semanas, com entregas parceladas.",
+            tech: ["</> Prazos ágeis", "</> Entregas parceladas"],
+            tooltips: {
+                "entregas parceladas": "Dividimos o projeto em etapas com entregas parciais para seu acompanhamento"
+            }
         },
         {
-            question: "Você faz sites responsivos para mobile?",
-            answer: "Sim, todos meus projetos são desenvolvidos com Mobile-First approach, garantindo perfeita adaptação em smartphones, tablets e desktops. Utilizo técnicas avançadas de CSS Grid e Flexbox.",
-            tech: ["</> Mobile-First", "</> Design Responsivo"]
+            question: "Qual o formato de pagamento?",
+            answer: "Aceitamos PIX, dinheiro ou cartão (em até 5x sem juros). O pagamento é dividido em: 50% para iniciar o desenvolvimento e 50% na entrega final.",
+            tech: ["</> Flexibilidade", "</> Parcelamento"]
         },
         {
             question: "Como é o processo de criação?",
-            answer: "1) Briefing detalhado - 2) Protótipo navegável - 3) Desenvolvimento em etapas - 4) Revisões e ajustes - 5) Treinamento e entrega. Você acompanha cada fase através de demonstrações online.",
+            answer: "Nosso fluxo de trabalho:",
+            process: [
+                { step: "1", title: "Briefing", description: "Análise detalhada das necessidades" },
+                { step: "2", title: "Protótipo", description: "Layout navegável para aprovação" },
+                { step: "3", title: "Desenvolvimento", description: "Codificação em etapas" },
+                { step: "4", title: "Revisões", description: "Ajustes finais" },
+                { step: "5", title: "Entrega", description: "Treinamento e publicação" }
+            ],
             tech: ["</> Metodologia Ágil", "</> Transparência"]
         },
         {
             question: "Quais tecnologias você utiliza?",
-            answer: "Front-end: React, Next.js, TailwindCSS. Back-end: Node.js, Express, MongoDB. Para performance: Webpack, Lighthouse. Sempre atualizado com as melhores práticas do mercado.",
-            tech: ["</> Stack Moderna", "</> Performance Otimizada"]
+            answer: "Trabalhamos com as melhores tecnologias do mercado:",
+            techList: [
+                { name: "React", type: "Front-end" },
+                { name: "Tailwind CSS", type: "Front-end" },
+                { name: "Node.js", type: "Back-end" },
+                { name: "MongoDB", type: "Banco de dados" }
+            ],
+            tech: ["</> Stack Moderna", "</> Performance"]
         },
         {
-            question: "Você oferece manutenção após o lançamento?",
-            answer: "Sim, ofereço pacotes de manutenção mensal que incluem atualizações de segurança, backups, otimizações e suporte técnico rápido. Garantindo que seu site permaneça sempre funcional e atualizado.",
-            tech: ["</> Suporte Contínuo", "</> Atualizações"]
+            question: "Você faz sites responsivos para mobile?",
+            answer: "Sim, todos nossos projetos são desenvolvidos com abordagem Mobile-First, garantindo perfeita adaptação em qualquer dispositivo.",
+            tech: ["</> Mobile-First", "</> Design Responsivo"],
+            tooltips: {
+                "Mobile-First": "Desenvolvimento iniciado pela versão mobile para melhor experiência"
+            }
         }
     ];
 
     const handleTabClick = (index) => {
-        setActiveTab(index === activeTab ? null : index);
+        setActiveTab(activeTab === index ? null : index);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (faqRef.current && !faqRef.current.contains(event.target)) {
+                setActiveTab(null);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    const renderWithTooltips = (text, tooltips) => {
+        if (!tooltips) return text;
+        
+        return text.split(' ').map((word, i) => {
+            const lowerWord = word.toLowerCase().replace(/[.,]/g, '');
+            return tooltips[lowerWord] ? (
+                <span key={i} className="tooltip-container">
+                    {word}
+                    <span className="tooltip">{tooltips[lowerWord]}</span>
+                </span>
+            ) : (
+                word + ' '
+            );
+        });
     };
 
     return (
-        <section id="faq" className="faq-tech" aria-labelledby="faq-heading">
+        <section id="faq" className="faq-tech" aria-labelledby="faq-heading" ref={faqRef}>
             <div className="tech-grid-lines"></div>
             <div className="container faq-container">
                 <h2 className="animated" id="faq-heading">
@@ -64,7 +113,38 @@ const FAQ = () => {
                             </div>
                             
                             <div className="faq-tab-content">
-                                <p className="tech-text">{item.answer}</p>
+                                <p className="tech-text">
+                                    {item.tooltips 
+                                        ? renderWithTooltips(item.answer, item.tooltips)
+                                        : item.answer
+                                    }
+                                </p>
+
+                                {item.process && (
+                                    <div className="process-timeline">
+                                        {item.process.map((step, i) => (
+                                            <div key={i} className="process-step">
+                                                <div className="step-number">{step.step}</div>
+                                                <div className="step-content">
+                                                    <h4>{step.title}</h4>
+                                                    <p>{step.description}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {item.techList && (
+                                    <div className="tech-list">
+                                        {item.techList.map((tech, i) => (
+                                            <div key={i} className="tech-item">
+                                                <span className="tech-name">{tech.name}</span>
+                                                <span className="tech-type">{tech.type}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
                                 <div className="faq-tech-highlights">
                                     {item.tech.map((tech, i) => (
                                         <span key={i} className="tech-tag">{tech}</span>
