@@ -1,21 +1,42 @@
-.footer {
-  background: linear-gradient(90deg, rgba(15,15,15,0.5) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(15,15,15,0.5046393557422969) 100%);  color: #fff;
+/* Footer.css */
+.tech-footer {
+  position: relative;
+  background: var(--darker-tech);
+  color: var(--text-muted-tech);
   text-align: center;
-  padding: 1.5rem 1rem;
-  font-size: 1rem; 
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(0, 240, 255, 0.05);
+  z-index: 1;
 }
 
+.tech-footer-text {
+  position: relative;
+  z-index: 2;
+}
+
+.tech-accent {
+  color: var(--primary-tech);
+  font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .tech-footer {
+    padding: 1.8rem 1rem;
+  }
+}
 
 @media (max-width: 768px) {
-  .footer {
-    padding: 1rem 0.5rem; 
-    font-size: 0.85rem; 
+  .tech-footer {
+    padding: 1.5rem 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
-  .footer {
-    padding: 0.8rem 0.4rem; 
-    font-size: 0.75rem; 
+  .tech-footer {
+    padding: 1.2rem 0.5rem;
+    font-size: 0.8rem;
   }
 }

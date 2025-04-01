@@ -1,143 +1,215 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
-
-.header {
+/* Header.css */
+.header-tech {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    background: url('/videos/videobackground.gif') center/cover no-repeat;
-    color: #fff;
+    padding: 3rem 2rem;
+    background: var(--dark-tech);
+    color: var(--text-tech);
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
-    font-family: 'Rajdhani', sans-serif;
-    min-height: 400px;
-    box-sizing: border-box;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    min-height: 100vh;
     width: 100%;
-}
-
-.header::before {
-    content: '';
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  }
+  
+  .tech-grid-lines {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.56); 
+    background: 
+      linear-gradient(90deg, var(--darker-tech) 1px, transparent 1px),
+      linear-gradient(var(--darker-tech) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
     z-index: 1;
-}
-
-.header * {
+  }
+  
+  .header-content {
     position: relative;
     z-index: 2;
-}
-
-
-.professional-name {
-    font-size: 3.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    opacity: 1; /* Garante que todo o conteúdo fique visível */
+  }
+  
+  .professional-name-tech,
+  .professional-title-tech,
+  .cta-phrase-tech,
+  .tech-cta {
+    opacity: 1; /* Garante que todos os elementos sejam visíveis */
+    transform: none; /* Remove transformações que possam estar escondendo elementos */
+  }
+  
+  .professional-name-tech {
+    font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 700;
-    color: #ffffff;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Rajdhani', sans-serif;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 4px solid #fff;
-    width: 0;
-    animation: typing 1.8s steps(15) 0.5s forwards, cursorDisappear 2s 3s forwards;
-}
-
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes cursorDisappear {
-    0% {
-        border-right: 4px solid #fff;
-    }
-    100% {
-        border-right: 4px solid transparent;
-    }
-}
-
-.professional {
-    font-size: 1.8rem;
-    color: #ddd;
-    margin-bottom: 1rem;
-    font-family: 'Rajdhani', sans-serif;
-}
-
-.cta-phrase {
-    font-size: 1.3rem;
-    color: #fff;
-    font-style: normal;
+    letter-spacing: 4px;
+    line-height: 1.2;
+  }
+  
+  .professional-title-tech {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
     margin-bottom: 1.5rem;
-    font-family: 'Rajdhani', sans-serif;
-}
-
-.whatsapp-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #004d7a;
-    text-decoration: none;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #ffffff;
-    z-index: 0;
+  }
+  
+  .cta-phrase-tech {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 500;
+    color: var(--text-muted-tech);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta-line-break {
+    display: block;
+    margin-top: 0.5rem;
+  }
+  
+  .tech-highlight {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--primary-tech), var(--secondary-tech));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
     position: relative;
-    transition: color 0.5s ease, transform 0.2s;
-    font-family: 'Rajdhani', sans-serif;
-}
-
-.whatsapp-button:hover {
-    color: #fff;
-    transform: scale(1.05);
-}
-
-.whatsapp-button::before {
+  }
+  
+  .tech-highlight::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-tech), transparent);
+  }
+  
+  .tech-accent {
+    color: var(--primary-tech);
+    font-weight: 600;
+  }
+  
+  .tech-cta {
+    margin-top: 2.5rem;
+  }
+  
+  .tech-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-tech);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--primary-tech), var(--secondary-tech));
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  
+  .tech-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+  }
+  
+  .button-icon {
+    font-weight: 700;
+  }
+  
+  .button-pulse {
+    position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, rgba(0,0,0,0.9500175070028011) 0%, rgba(41,91,36,0.9500175070028011) 71%, rgba(36,126,25,0.9500175070028011) 87%, rgba(1,9,1,0.9500175070028011) 100%);    border-radius: inherit;
-    z-index: -1;
-    transition: left 0.7s ease;
-}
-
-.whatsapp-button:hover::before {
+    top: 0;
     left: 0;
-}
-
-@media (max-width: 768px) {
-    .whatsapp-button {
-        font-size: 0.8rem;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .tech-button:hover .button-pulse {
+    transform: translateX(100%);
+  }
+  
+  /* Animações suaves */
+  .animated {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-
-    .professional-name {
-        font-size: 2.8rem;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    .professional {
-        font-size: 1.6rem;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .header-tech {
+      padding: 2rem 1rem;
+      min-height: 100vh;
     }
-
-    .cta-phrase {
-        font-size: 1.2rem;
+    
+    .header-content {
+      padding: 1rem;
     }
-
-    .header {
-        min-height: auto;
+    
+    .cta-phrase-tech {
+      margin-bottom: 2rem;
     }
-}
+    
+    .tech-button {
+      padding: 0.8rem 1.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header-tech {
+      min-height: 100vh;
+    }
+    
+    .professional-name-tech {
+      letter-spacing: 2px;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .professional-title-tech {
+      font-size: 1.3rem;
+    }
+    
+    .tech-button {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
+  }
